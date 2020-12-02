@@ -6,8 +6,12 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Jamie Devine",
+      "name": "Benjamin Issleib",
       "homepage": "https://www.kampfq.eu"
+    },
+    {
+      "name": "Jamie Devine",
+      "homepage": "https://www.doublespark.co.uk"
     }
   ],
   "require": {
