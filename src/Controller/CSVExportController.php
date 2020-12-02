@@ -55,6 +55,7 @@ class CSVExportController extends \Backend
 			return '<a href="'.$this->addToUrl($href).'&amp;id='.$arrRow["id"].'" title="'.specialchars($title).'"'.$attributes.'>'.\Image::getHtml($icon, $label).'</a> ';
 
 		} else {
+			$icon = str_replace('.gif','_.gif');
 			return \Image::getHtml($icon, $label);
 		}
 
