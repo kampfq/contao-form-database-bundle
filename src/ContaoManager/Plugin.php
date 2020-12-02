@@ -10,13 +10,13 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-namespace Doublespark\FormDatabase\ContaoManager;
+namespace NK\FormDatabase\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-use Doublespark\FormDatabase\FormDatabaseBundle;
+use NK\FormDatabase\FormDatabaseBundle;
 
 class Plugin implements BundlePluginInterface
 {
@@ -28,7 +28,7 @@ class Plugin implements BundlePluginInterface
         return [
             BundleConfig::create(FormDatabaseBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class])
-                ->setReplace(['doublespark-form-database']),
+                ->setReplace(['NK-form-database']),
         ];
     }
 }

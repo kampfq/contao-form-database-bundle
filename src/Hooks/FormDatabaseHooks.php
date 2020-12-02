@@ -1,8 +1,8 @@
 <?php
 
-namespace Doublespark\FormDatabase\Hooks;
+namespace NK\FormDatabase\Hooks;
 
-use Doublespark\FormDatabase\Models\FormDbModel;
+use NK\FormDatabase\Models\FormDbModel;
 
 class FormDatabaseHooks
 {
@@ -14,6 +14,10 @@ class FormDatabaseHooks
      */
     public function processFormData($arrPost, $arrForm, $arrFiles)
     {
+		if(!$arrForm['csvExport']){
+			return;
+		}
+
         if(is_array($arrPost))
         {
             $objFormSubmission                 = new FormDbModel();
@@ -21,7 +25,8 @@ class FormDatabaseHooks
             $objFormSubmission->submitted_date = time();
             $objFormSubmission->form_data      = json_encode($arrPost);
             $objFormSubmission->form_name      = $arrForm['title'];
-            $objFormSubmission->save();
+			$objFormSubmission->pid        = $arrForm['id'];
+			$objFormSubmission->save();
         }
     }
 }

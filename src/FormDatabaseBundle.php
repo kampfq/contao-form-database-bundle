@@ -3,7 +3,7 @@
 /***
  * FormDatabase bundle
  */
-namespace Doublespark\FormDatabase;
+namespace NK\FormDatabase;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

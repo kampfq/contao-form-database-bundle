@@ -1,0 +1,62 @@
+<?php
+
+namespace NK\FormDatabase\Controller;
+
+
+use NK\FormDatabase\Models\FormDbModel;
+use League\Csv\Writer;
+
+
+class CSVExportController extends \Backend
+{
+
+
+	public function exportCsvFunction(\Contao\DC_Table $dc)
+	{
+
+		$writer = Writer::createFromString();
+		$formDataSets = FormDbModel::findBy('pid',$dc->id);
+
+		$fileName = '';
+
+		$csvBody=[];
+		foreach($formDataSets as $dataSet){
+			$data = json_decode($dataSet->form_data,true);
+			$fileName = $dataSet -> form_name;
+			$csvHeader=[];
+			$outputSet = [];
+			foreach ($data as $key => $value){
+				$csvHeader[] = $key;
+				if(is_array($value)){
+					$cell = '';
+					foreach($value as $v){
+						$cell .= $v.' ';
+					}
+					$outputSet[] = $cell;
+				} else {
+					$outputSet[]=$value;
+				}
+
+			}
+			$csvBody[]=$outputSet;
+		}
+		$writer->insertOne($csvHeader);
+		$writer->insertAll($csvBody);
+		$writer->output($fileName . '.csv');
+		die;
+	}
+
+
+	public function checkVisibility($arrRow, $href, $label, $title, $icon, $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext)
+	{
+		$formDataSets = FormDbModel::findBy('pid',$arrRow["id"]);
+
+		if($formDataSets){
+			return '<a href="'.$this->addToUrl($href).'&amp;id='.$arrRow["id"].'" title="'.specialchars($title).'"'.$attributes.'>'.\Image::getHtml($icon, $label).'</a> ';
+
+		} else {
+			return \Image::getHtml($icon, $label);
+		}
+
+	}
+}

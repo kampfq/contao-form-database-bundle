@@ -1,6 +1,6 @@
 <?php
 
-namespace Doublespark\FormDatabase\Models;
+namespace NK\FormDatabase\Models;
 
 class FormDbModel extends \Model
 {
