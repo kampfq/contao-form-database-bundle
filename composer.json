@@ -1,6 +1,6 @@
 {
   "name": "kampfq/form-database-csv",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "type": "contao-bundle",
   "description": "A bundle for Contao 4. Saves all submitted FE forms to the database and provide a csv export.",
   "license": "MIT",
