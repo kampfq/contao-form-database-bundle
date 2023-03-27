@@ -20,27 +20,36 @@ class CSVExportController extends \Backend
 		$fileName = '';
 
 		$csvBody=[];
-		$csvHeader[];
+		$csvHeader=[];
+		foreach($formDataSets as $dataSet){
+			$data = json_decode($dataSet->form_data,true);
+			foreach ($data as $key => $value){
+				if(!in_array($key, $csvHeader)){
+					$csvHeader[] = $key;
+				}
+			}
+		}
+		
+		
 		foreach($formDataSets as $dataSet){
 			$data = json_decode($dataSet->form_data,true);
 			$fileName = $dataSet -> form_name;
-			$csvHeader=[];
 			$outputSet = [];
-			foreach ($data as $key => $value){
-				if(!in_array($key, array $csvHeader){
-					$csvHeader[] = $key;
-				}
+			$index = 0;
+
+			foreach($csvHeader as $column){
+				$value = $data[$column];
 				if(is_array($value)){
 					$cell = '';
 					foreach($value as $v){
 						$cell .= $v.' ';
 					}
-					$outputSet[$key] = $cell;
+					$outputSet[] = $cell;
 				} else {
-					$outputSet[$key]=$value;
+					$outputSet[]=$value;
 				}
-
 			}
+
 			$csvBody[]=$outputSet;
 		}
 		$writer->insertOne($csvHeader);
