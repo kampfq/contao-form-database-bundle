@@ -20,21 +20,24 @@ class CSVExportController extends \Backend
 		$fileName = '';
 
 		$csvBody=[];
+		$csvHeader[];
 		foreach($formDataSets as $dataSet){
 			$data = json_decode($dataSet->form_data,true);
 			$fileName = $dataSet -> form_name;
 			$csvHeader=[];
 			$outputSet = [];
 			foreach ($data as $key => $value){
-				$csvHeader[] = $key;
+				if(!in_array($key, array $csvHeader){
+					$csvHeader[] = $key;
+				}
 				if(is_array($value)){
 					$cell = '';
 					foreach($value as $v){
 						$cell .= $v.' ';
 					}
-					$outputSet[] = $cell;
+					$outputSet[$key] = $cell;
 				} else {
-					$outputSet[]=$value;
+					$outputSet[$key]=$value;
 				}
 
 			}
